@@ -1,0 +1,23 @@
+{
+  "name": "pigpio-button",
+  "version": "1.0.0",
+  "description": "Button using module pigpio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meg768/pigpio-button.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meg768/pigpio-button/issues"
+  },
+  "dependencies": {
+    "pigpio": "^0.6.2"
+  }
+
+  "homepage": "https://github.com/meg768/pigpio-button#readme"
+}
