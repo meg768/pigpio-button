@@ -16,7 +16,7 @@ var button = new Button({pin:19});
 button.on('click', (clicks, time) => {
 
     // clicks - number of clicks
-    // time   - milliseconds since first button press
+    // time   - milliseconds since last button press
 
     if (clicks == 1) {
         if (time < 1000)
