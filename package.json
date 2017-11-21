@@ -1,6 +1,6 @@
 {
   "name": "pigpio-button",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Button using module pigpio",
   "main": "index.js",
   "scripts": {

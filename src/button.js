@@ -8,21 +8,22 @@ module.exports = class Button extends Events {
 
 		super();
 
-		options = Object.assign({}, {autoEnable:true, enable:true}, options);
+		options = Object.assign({}, {autoEnable:true, timeout:250, defaultState:0}, options);
 
 		if (options.pin == undefined)
 			throw new Error('Must supply a pin for the button.');
 
 		this.pin          = options.pin;
-		this.gpio         = new Gpio(this.pin, {mode: Gpio.INPUT, pullUpDown: Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
-		this.initialState = 0;
-		this.state        = this.initialState;
+		this.defaultState = options.defaultState;
+		this.state        = options.defaultState;
+		this.timeout      = options.timeout;
 		this.pressed      = 0;
 		this.released     = 0;
 		this.clicks       = 0;
 		this.timer        = null;
+		this.gpio         = new Gpio(this.pin, {mode: Gpio.INPUT, pullUpDown: this.defaultState ? Gpio.PUD_UP : Gpio.PUD_DOWN, edge: Gpio.EITHER_EDGE});
 
-		if (options.autoEnable || options.enable)
+		if (options.autoEnable)
 			this.enable();
 
 	}
@@ -52,13 +53,13 @@ module.exports = class Button extends Events {
 
 				this.emit('change', state, now);
 
-				if (state == 0) {
+				if (state == this.defaultState) {
 					this.clicks++;
 
 					this.timer = setTimeout(() => {
 						this.emit('click', this.clicks, now - this.pressed);
 						this.clicks = 0;
-					}, 250);
+					}, this.timeout);
 
 					this.released = now;
 				}
