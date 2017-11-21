@@ -1,6 +1,6 @@
 # pigpio-button
 
-Button using module pigpio.
+Button using npm module **pigpio**.
 
 ## Installation
 	$ npm install pigpio-button --save
@@ -9,6 +9,8 @@ Button using module pigpio.
 
 ````javascript
 var Button = require('pigpio-button');
+
+// Construct a new button. See source code for more options.
 var button = new Button({pin:19});
 
 button.on('click', (clicks, time) => {
@@ -17,7 +19,10 @@ button.on('click', (clicks, time) => {
     // time   - milliseconds since first button press
 
     if (clicks == 1) {
-        console.log('Single click.');
+        if (time < 1000)
+            console.log('Single click.');
+        else
+            console.log('Single long click.');
     }
     else {
         console.log('Double click (or more)');
