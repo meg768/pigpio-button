@@ -2,11 +2,18 @@ var Events     = require('events');
 var Pigpio     = require('pigpio');
 var Gpio       = require('pigpio').Gpio;
 
+function isInteger(n) {
+    return Number(n) === n && n % 1 === 0;
+}
+
 module.exports = class Button extends Events {
 
 	constructor(options) {
 
 		super();
+
+		if (isInteger(options))
+			options = {pin:options};
 
 		options = Object.assign({}, {autoEnable:true, timeout:250, defaultState:0}, options);
 
@@ -51,6 +58,7 @@ module.exports = class Button extends Events {
 					this.timer = null;
 				}
 
+				this.emit(state ? 'press' : 'release', now);
 				this.emit('change', state, now);
 
 				if (state == this.defaultState) {
