@@ -6,6 +6,13 @@ function isInteger(n) {
     return Number(n) === n && n % 1 === 0;
 }
 
+function isFunction(obj) {
+	return typeof obj === 'function';
+};
+
+function debug() {
+}
+
 module.exports = class Button extends Events {
 
 	constructor(options) {
@@ -13,13 +20,17 @@ module.exports = class Button extends Events {
 		super();
 
 		if (isInteger(options))
-			options = {pin:options};
+			options = {pin:options, debug:debug};
 
 		options = Object.assign({}, {autoEnable:true, timeout:250, defaultState:0}, options);
+
+		if (isFunction(options.debug))
+			debug = options.debug;
 
 		if (options.pin == undefined)
 			throw new Error('Must supply a pin for the button.');
 
+		if ()
 		this.pin          = options.pin;
 		this.defaultState = options.defaultState;
 		this.state        = options.defaultState;
