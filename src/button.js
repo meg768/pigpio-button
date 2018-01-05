@@ -30,7 +30,6 @@ module.exports = class Button extends Events {
 		if (options.pin == undefined)
 			throw new Error('Must supply a pin for the button.');
 
-		if ()
 		this.pin          = options.pin;
 		this.defaultState = options.defaultState;
 		this.state        = options.defaultState;
