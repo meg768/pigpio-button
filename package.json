@@ -16,7 +16,7 @@
     "url": "https://github.com/meg768/pigpio-button/issues"
   },
   "dependencies": {
-    "pigpio": "^0.6.2"
+    "pigpio": "0.6.2"
 },
 
   "homepage": "https://github.com/meg768/pigpio-button#readme"
